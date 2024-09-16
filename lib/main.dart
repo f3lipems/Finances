@@ -18,6 +18,9 @@ class Finances extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
+  final titleController = TextEditingController();
+  var valueController = TextEditingController();
+
   final _trasactions = [
     Transaction(id: 't1', title: 'Tênis', value: 300.00, date: DateTime.now()),
     Transaction(id: 't2', title: 'Luz', value: 198.34, date: DateTime.now()),
@@ -36,6 +39,7 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          
           Container(
             width: double.infinity,
             child: const Card(
@@ -44,6 +48,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Gráfico'),
             ),
           ),
+          
           Column(
             children: [
               ..._trasactions.map((tr) {
@@ -95,26 +100,32 @@ class MyHomePage extends StatelessWidget {
               })
             ],
           ),
+          
           Card(
             elevation: 5,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  const TextField(
-                    decoration: InputDecoration(labelText: 'Título'),
+                  TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(labelText: 'Título'),
                   ),
-                  const TextField(
-                    decoration: InputDecoration(labelText: 'Valor (R\$)'),
+                  TextField(
+                    controller: valueController,
+                    decoration: const InputDecoration(labelText: 'Valor (R\$)'),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print(titleController.text);
+                          print(valueController.text);
+                        },
                         style: const ButtonStyle(
-                          foregroundColor: WidgetStatePropertyAll(Colors.purple)
-                        ),
+                            foregroundColor:
+                                WidgetStatePropertyAll(Colors.purple)),
                         child: const Text('Nova Transação'),
                       ),
                     ],
