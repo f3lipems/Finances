@@ -14,6 +14,30 @@ class Finances extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(1, 22, 175, 206),
+          brightness: Brightness.light,
+          secondary: const Color.fromARGB(1, 125, 149, 156),
+          tertiary: const Color.fromARGB(1, 138, 142, 1179),
+        ),
+        fontFamily: 'Quicksand',
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -26,9 +50,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _trasactions = [
-    Transaction(id: 't1', title: 'Tênis', value: 300.00, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Luz', value: 198.34, date: DateTime.now()),
+  final List<Transaction> _trasactions = [
+    // Transaction(id: 't1', title: 'Tênis', value: 300.00, date: DateTime.now()),
+    // Transaction(id: 't2', title: 'Luz', value: 198.34, date: DateTime.now()),
   ];
 
   _addTransaction(String title, double value) {
@@ -58,18 +82,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         actions: [
           IconButton(
             onPressed: () => _openTransactionFormModal(context),
             icon: const Icon(Icons.add),
-            color: Colors.white,
           )
         ],
         title: const Text(
           'Finanças',
-          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Column(
