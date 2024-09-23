@@ -39,44 +39,28 @@ class TransactionList extends StatelessWidget {
                 final tr = transaction[index];
 
                 return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 2,
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          'R\$ ${tr.value.toStringAsFixed(2)}',
-                          style: Theme.of(context).textTheme.titleSmall,
-                          // style: const TextStyle(
-                          //   fontWeight: FontWeight.bold,
-                          //   fontSize: 20,
-                          //   color: Colors.purple,
-                          // ),
+                  elevation: 5,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 5,
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      tr.title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(tr.date),
+                    ),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FittedBox(
+                          child: Text('R\$${tr.value}'),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            tr.title,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          Text(
-                            DateFormat('d MMM y').format(tr.date),
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
                   ),
                 );
               },
