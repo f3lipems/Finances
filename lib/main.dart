@@ -21,6 +21,7 @@ class Finances extends StatelessWidget {
           seedColor: const Color.fromARGB(1, 22, 175, 206),
           brightness: Brightness.light,
           secondary: const Color.fromARGB(1, 125, 149, 156),
+          // : const Color.fromARGB(1, 125, 149, 156),
           tertiary: const Color.fromARGB(1, 138, 142, 1179),
         ),
         fontFamily: 'Quicksand',
