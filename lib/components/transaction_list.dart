@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({super.key, required this.transaction});
+  const TransactionList({super.key, required this.transaction, required this.onRemove});
+  final void Function(String) onRemove;
 
   final List<Transaction> transaction;
 
@@ -60,6 +61,11 @@ class TransactionList extends StatelessWidget {
                           child: Text('R\$${tr.value}'),
                         ),
                       ),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () => onRemove(tr.id),
+                      icon: const Icon(Icons.delete),
+                      color: Theme.of(context).colorScheme.error,
                     ),
                   ),
                 );
