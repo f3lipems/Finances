@@ -4,12 +4,18 @@ import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   const TransactionList({super.key, required this.transaction, required this.onRemove});
-  final void Function(String) onRemove;
 
   final List<Transaction> transaction;
+  final void Function(String) onRemove;
+
+  void _orderTransactions() {
+    transaction.sort((a, b) => a.date.compareTo(b.date));
+  }
 
   @override
   Widget build(BuildContext context) {
+    _orderTransactions();
+
     return Container(
       height: 300,
       child: transaction.isEmpty
