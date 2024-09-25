@@ -103,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
       title: const Text(
         'Finanças',
+        textScaler: TextScaler.linear(1),
       ),
     );
 
