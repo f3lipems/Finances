@@ -34,11 +34,14 @@ class TransactionList extends StatelessWidget {
               height: constraints.maxHeight * 0.05,
             ),
             SizedBox(
-              height: constraints.maxHeight * 0.7,
+              height: constraints.maxHeight * 0.6,
               child: Image.asset(
                 'assets/images/waiting.png',
                 fit: BoxFit.cover,
               ),
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.1,
             )
           ],
         );

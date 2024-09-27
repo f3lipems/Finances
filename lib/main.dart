@@ -96,6 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     var appBar = AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -119,26 +121,27 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Exibir Gráfico'),
-                Switch(
-                  value: _showChart,
-                  onChanged: (value) {
-                    setState(() {
-                      _showChart = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            if (_showChart)
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Exibir Gráfico'),
+                  Switch(
+                    value: _showChart,
+                    onChanged: (value) {
+                      setState(() {
+                        _showChart = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            if (_showChart || !isLandscape)
               SizedBox(
-                height: availableHeight * 0.25,
+                height: availableHeight * (isLandscape ? 0.7 : 0.25),
                 child: Chart(recentTransactions: _recentTransactions),
               ),
-            if (!_showChart)
+            if (!_showChart || !isLandscape)
               SizedBox(
                 height: availableHeight * 0.75,
                 child: TransactionList(transaction: _trasactions, onRemove: _deleteTransaction),
