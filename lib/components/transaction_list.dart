@@ -16,64 +16,71 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     _orderTransactions();
 
-    return transaction.isEmpty
-        ? Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
+    if (transaction.isEmpty) {
+      return LayoutBuilder(builder: (context, constraints) {
+        return Column(
+          children: [
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.2,
+              child: Text(
                 'Nenhuma transação cadastrada.',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
-              const SizedBox(
-                height: 20,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.7,
+              child: Image.asset(
+                'assets/images/waiting.png',
+                fit: BoxFit.cover,
               ),
-              SizedBox(
-                height: 200,
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit.cover,
-                ),
-              )
-            ],
-          )
-        : ListView.builder(
-            itemCount: transaction.length,
-            itemBuilder: (ctx, index) {
-              final tr = transaction[index];
+            )
+          ],
+        );
+      });
+    } else {
+      return ListView.builder(
+        itemCount: transaction.length,
+        itemBuilder: (ctx, index) {
+          final tr = transaction[index];
 
-              return Card(
-                elevation: 5,
-                margin: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 5,
-                ),
-                child: ListTile(
-                  title: Text(
-                    tr.title,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  subtitle: Text(
-                    DateFormat('d MMM y').format(tr.date),
-                  ),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FittedBox(
-                        child: Text('R\$${tr.value}'),
-                      ),
-                    ),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () => onRemove(tr.id),
-                    icon: const Icon(Icons.delete),
-                    color: Theme.of(context).colorScheme.error,
+          return Card(
+            elevation: 5,
+            margin: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 5,
+            ),
+            child: ListTile(
+              title: Text(
+                tr.title,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              subtitle: Text(
+                DateFormat('d MMM y').format(tr.date),
+              ),
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(
+                    child: Text('R\$${tr.value}'),
                   ),
                 ),
-              );
-            },
+              ),
+              trailing: IconButton(
+                onPressed: () => onRemove(tr.id),
+                icon: const Icon(Icons.delete),
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
           );
+        },
+      );
+    }
   }
 }
