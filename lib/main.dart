@@ -56,6 +56,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _trasactions = [];
+  bool _showChart = true;
 
   List<Transaction> get _recentTransactions {
     return _trasactions.where((tr) {
@@ -118,14 +119,30 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
-              height: availableHeight * 0.25,
-              child: Chart(recentTransactions: _recentTransactions),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Exibir Gráfico'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
             ),
-            SizedBox(
-              height: availableHeight * 0.75,
-              child: TransactionList(transaction: _trasactions, onRemove: _deleteTransaction),
-            ),
+            if (_showChart)
+              SizedBox(
+                height: availableHeight * 0.25,
+                child: Chart(recentTransactions: _recentTransactions),
+              ),
+            if (!_showChart)
+              SizedBox(
+                height: availableHeight * 0.75,
+                child: TransactionList(transaction: _trasactions, onRemove: _deleteTransaction),
+              ),
           ],
         ),
       ),
