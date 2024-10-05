@@ -9,14 +9,18 @@ import './components/transaction_list.dart';
 import './components/chart.dart';
 import '../models/transaction.dart';
 
-void main() => runApp(const Finances());
+void main() => runApp(const Expenses());
 
-class Finances extends StatelessWidget {
-  const Finances({super.key});
+class Expenses extends StatelessWidget {
+  const Expenses({super.key});
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
 
     return MaterialApp(
       home: MyHomePage(),
@@ -137,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       actions: actions,
       title: const Text(
-        'Finanças',
+        'Despesas',
         textScaler: TextScaler.linear(1),
       ),
     );
@@ -167,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Platform.isIOS
         ? CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
-              middle: const Text('Finanças'),
+              middle: const Text('Despesas'),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: actions,

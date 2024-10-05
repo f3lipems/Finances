@@ -1,6 +1,6 @@
 {
-    "name": "finances",
-    "short_name": "finances",
+    "name": "expenses",
+    "short_name": "expenses",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
