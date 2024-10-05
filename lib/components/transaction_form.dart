@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'adaptative_button.dart';
 import 'adaptative_text_field.dart';
+import 'adaptative_date_picker.dart';
 
 class TransactionForm extends StatefulWidget {
   TransactionForm({super.key, required this.onSubmit});
@@ -26,23 +26,6 @@ class _TransactionFormState extends State<TransactionForm> {
     }
 
     widget.onSubmit(title, value, _transactionSelectedDate);
-  }
-
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2024),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      } else {
-        setState(() {
-          _transactionSelectedDate = pickedDate;
-        });
-      }
-    });
   }
 
   @override
@@ -70,29 +53,17 @@ class _TransactionFormState extends State<TransactionForm> {
                 onSubmitted: (_) => _submitForm(),
                 label: 'Valor (R\$)',
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text('Data selecionada: ${DateFormat('dd/MM/y').format(_transactionSelectedDate)}'),
-                    ),
-                    TextButton(
-                      onPressed: _showDatePicker,
-                      child: Text(
-                        'Selecionar Data',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+              AdaptativeDatePicker(
+                selectedDate: _transactionSelectedDate,
+                onDateChange: (newDate) {
+                  setState(() {
+                    _transactionSelectedDate = newDate;
+                  });
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [Adaptativebutton(label: 'Nova Transação', onPressed: _submitForm)],
+                children: [AdaptativeButton(label: 'Nova Transação', onPressed: _submitForm)],
               )
             ],
           ),

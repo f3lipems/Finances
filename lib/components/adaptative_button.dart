@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class Adaptativebutton extends StatelessWidget {
-  const Adaptativebutton({super.key, required this.label, required this.onPressed});
+class AdaptativeButton extends StatelessWidget {
+  const AdaptativeButton({super.key, required this.label, required this.onPressed});
 
   final String label;
   final Function() onPressed;
