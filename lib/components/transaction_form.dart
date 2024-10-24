@@ -4,7 +4,7 @@ import 'adaptative_text_field.dart';
 import 'adaptative_date_picker.dart';
 
 class TransactionForm extends StatefulWidget {
-  TransactionForm({super.key, required this.onSubmit});
+  const TransactionForm({super.key, required this.onSubmit});
 
   final void Function(String, double, DateTime) onSubmit;
 
@@ -13,9 +13,9 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final _titleController = TextEditingController();
-  final _valueController = TextEditingController();
-  DateTime _transactionSelectedDate = DateTime.now();
+  final _titleController = TextEditingController(); 
+  final _valueController = TextEditingController(); 
+  DateTime _transactionSelectedDate = DateTime.now(); 
 
   _submitForm() {
     final title = _titleController.text;

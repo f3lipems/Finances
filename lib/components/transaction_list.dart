@@ -2,21 +2,26 @@ import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import './transaction_item.dart';
 
-class TransactionList extends StatelessWidget {
+class TransactionList extends StatefulWidget {
   const TransactionList({super.key, required this.transaction, required this.onRemove});
 
   final List<Transaction> transaction;
   final void Function(String) onRemove;
 
+  @override
+  State<TransactionList> createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
   void _orderTransactions() {
-    transaction.sort((a, b) => a.date.compareTo(b.date));
+    widget.transaction.sort((a, b) => a.date.compareTo(b.date));
   }
 
   @override
   Widget build(BuildContext context) {
     _orderTransactions();
 
-    if (transaction.isEmpty) {
+    if (widget.transaction.isEmpty) {
       return LayoutBuilder(builder: (context, constraints) {
         return Column(
           children: [
@@ -47,11 +52,24 @@ class TransactionList extends StatelessWidget {
         );
       });
     } else {
+      // return ListView(
+      //   children: widget.transaction.map((tr) {
+      //     return TransactionItem(
+      //       key: ValueKey(tr.id),
+      //       tr: tr,
+      //       onRemove: widget.onRemove,
+      //     );
+      //   }).toList(),
+      // );
       return ListView.builder(
-        itemCount: transaction.length,
+        itemCount: widget.transaction.length,
         itemBuilder: (ctx, index) {
-          final tr = transaction[index];
-          return TransactionItem(tr: tr, onRemove: onRemove);
+          final tr = widget.transaction[index];
+          return TransactionItem(
+            key: GlobalObjectKey(tr.id),
+            tr: tr,
+            onRemove: widget.onRemove,
+          );
         },
       );
     }
